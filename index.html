@@ -353,12 +353,12 @@ function summary(){
   $('s-mot').textContent=M.motel?'Esticadinha: '+M.motel:'Esticadinha: fica para a próxima 😉';
   const n=calc();
   const sl = n===13 
-    ? ['☭🔥','Selo Esquerdista e Safada de Elite (Faz o L!)','Pontuação máxima, você zerou a safadeza e garantiu a revolução completa sem pressa! 😈','#9f1239'] 
+    ? ['☭🔥',' Esquerdista e Safada de Elite (Faz o L!)','Pontuação máxima, você zerou a safadeza e garantiu a revolução completa sem pressa! 😈','#9f1239'] 
     : n===12 
-      ? ['☭😏','Selo Quase Esquerdista de Elite','Você quase fez o L! Dica: o quarto 5 estrelas libera a revolução sem limites e vale 1 ponto a mais 😉','#a21caf']
-      : ['😇','Selo Comportada da Direita','Comportada demais hoje... mas a noite ainda promete! 😈✨','#b45309'];
+      ? ['☭😏',' Quase Esquerdista de Elite','Você quase fez o L! Dica: o quarto 5 estrelas libera a revolução sem limites e vale 1 ponto a mais 😉','#a21caf']
+      : ['😇',' Comportada da Direita','Comportada demais hoje... mas a noite ainda promete! 😈✨','#b45309'];
   $('seal').style.background=sl[3];
-  $('seal').innerHTML=`<div class="text-4xl">${sl[0]}</div><div class="text-base font-bold mt-1">Selo ${sl[1]}</div><div class="mt-1">${n}/13 ⭐️</div><div class="mt-1 font-normal">${sl[2]}</div>`;
+  $('seal').innerHTML=`<div class="text-4xl">${sl[0]}</div><div class="text-base font-bold mt-1"> ${sl[1]}</div><div class="mt-1">${n}/13 ⭐️</div><div class="mt-1 font-normal">${sl[2]}</div>`;
   go('p3');
 }
 // Envio (Lu)
