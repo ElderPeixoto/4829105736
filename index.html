@@ -229,7 +229,8 @@
 </footer>
 
 <script>
-const API='https://sheetdb.io/api/v1/hmgfme26d5ybw';
+const API='https://sheetdb.io/api/v1/akn2zy1h1dr0y';
+const SHEET_NAME='Lu';
 const $=id=>document.getElementById(id);
 let S,score,M;
 const fresh=()=>({ata:null,date:'',time:'',rest:'',sim:false,addr:'',addrPts:false});
@@ -365,7 +366,11 @@ function summary(){
 async function send(resp){
   const data={data_envio:new Date().toLocaleString('pt-BR'),resposta:resp,ataxia:S.ata==='ok'?'Por mim tudo bem':(S.ata==='res'?'Tem ressalvas':''),
     data_date:S.date,horario:S.time,restaurante:S.rest,endereco:S.addr.trim(),motel:M.motel,pontos:calc()};
-  try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data})});return r.ok;}
+  try{
+    const url=`${API}?sheet=${encodeURIComponent(SHEET_NAME)}`;
+    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data})});
+    return r.ok;
+  }
   catch(e){return false;}
 }
 async function conclude(btn,resp,next){
