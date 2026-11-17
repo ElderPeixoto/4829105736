@@ -368,15 +368,21 @@ async function send(resp){
     data_date:S.date,horario:S.time,restaurante:S.rest,endereco:S.addr.trim(),motel:M.motel,pontos:calc()};
   try{
     const url=`${API}?sheet=${encodeURIComponent(SHEET_NAME)}`;
-    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data})});
-    return r.ok;
+    const r=await fetch(url,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({data:[data]})});
+    if(!r.ok){
+      const err=await r.text();
+      console.error('Erro SheetDB:',r.status,err);
+      toast(`Erro ${r.status} ao salvar na planilha`);
+      return false;
+    }
+    return true;
   }
-  catch(e){return false;}
+  catch(e){console.error(e);return false;}
 }
 async function conclude(btn,resp,next){
   const t=btn.textContent;btn.disabled=true;btn.textContent='Enviando...';
   const ok=await send(resp);btn.disabled=false;btn.textContent=t;
-  if(ok)go(next);else toast('Não consegui enviar. Tente de novo 🙏');
+  if(ok)go(next);
 }
 $('conclude-no').onclick=e=>conclude(e.currentTarget,'NÃO','refuse');
 $('conclude-yes').onclick=e=>conclude(e.currentTarget,'SIM','done');
